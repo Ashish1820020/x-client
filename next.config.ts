@@ -5,6 +5,18 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
    domains: ['avatars.githubusercontent.com'],
+   remotePatterns: [
+    {
+      protocol: "https",
+      hostname: "ik.imagekit.io",
+      port: "",
+    },
+  ],
+  },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '50mb',
+    },
   },
 };
 
