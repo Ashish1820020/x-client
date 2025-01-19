@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import LeftBar from "@/components/HomePage/LeftBar";
-import RightBar from "@/components/HomePage/RightBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  modal
+  modal,
 }: Readonly<{
   children: React.ReactNode;
   modal: React.ReactNode;
@@ -32,19 +30,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-         <div className="max-w-screen-md lg:max-w-screen-lg mx-auto xl:max-w-screen-xl xxl:max-w-screen-xxl flex justify-between">
-      <div className="px-2 xsm:px-4 xxl:px-8">
-        <LeftBar />
-      </div>
-
-      <div className="flex-1 lg:min-w-[600px] border-x-[1px] border-borderGray">
         {children}
-        {modal}
-      </div>
-      <div className="hidden lg:flex ml-4 md:ml-8 flex-1">
-        <RightBar />
-      </div>
-    </div>
+        {modal && modal}
       </body>
     </html>
   );

@@ -1,8 +1,9 @@
 import Link from "next/link";
 import React from "react";
 import Image from "../Common/Image";
+import NextImage from "next/image";
 
-const LeftBar = () => {
+const LeftBar = ({user}: any) => {
   const leftBarLinks = [
     {
       id: 1,
@@ -87,10 +88,10 @@ const LeftBar = () => {
           ))}
 
           {/* Button */}
-          <Link href="/compose" className="hidden xxl:block text-black text-[15px] font-bold bg-white text-center w-[233px] h-[50px] rounded-3xl">
+          <Link href="/compose/post" className="hidden xxl:block text-black text-[15px] font-bold bg-white text-center w-[233px] h-[50px] rounded-3xl">
             Post
           </Link>
-          <Link href="/compose" className="flex items-center justify-center xxl:hidden text-[15px] font-bold h-[52px] w-[52px] bg-white rounded-full">
+          <Link href="/compose/post" className="flex items-center justify-center xxl:hidden text-[15px] font-bold h-[52px] w-[52px] bg-white rounded-full">
             <Image
               path={`/icons/post.svg`}
               className="text-black xxl:hidden"
@@ -105,17 +106,26 @@ const LeftBar = () => {
       <div className="flex justify-between items-center xxl:w-[100%]">
         <div className="flex gap-2 items-center">
           <div className="w-10 h-10 relative rounded-full overflow-hidden">
-            <Image
-              path="/feed-image.png"
-              alt="lama dev"
+            {/* <Image
+              path={user.profileImageUrl}
+              alt="profile-img"
               w={100}
               h={100}
               transform={true}
+            /> */}
+            <NextImage
+              src={user.profileImageUrl}
+              alt="profile-img"
+              width={100}
+              height={100}
+              layout="responsive"
+              objectFit="cover"
+              className="rounded-full"
             />
           </div>
 
           <div className="hidden xxl:flex flex-col">
-            <span className="text-bold">Ashish</span>
+            <span className="text-bold">{user?.firstName}</span>
             <span className="text-textGray text-sm">@Ashish182002</span>
           </div>
         </div>

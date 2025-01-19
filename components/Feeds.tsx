@@ -6,9 +6,6 @@ const Feeds = () => {
     <div>
       <FeedCard />
       <FeedCard />
-      <FeedCard />
-      <FeedCard />
-      <FeedCard />
     </div>
   )
 }

@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
       hostname: "ik.imagekit.io",
       port: "",
     },
+    {
+      protocol: "https",
+      hostname: "lh3.googleusercontent.com",
+      port: "",
+    },
   ],
   },
   experimental: {
