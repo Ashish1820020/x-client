@@ -20,7 +20,7 @@ export const shareAction = async (
       : ""
   }`;
 
-  imagekit.upload(
+ const {url, fileId, fileType} = await imagekit.upload(
     {
       file: buffer,
       fileName: file.name,
@@ -33,10 +33,8 @@ export const shareAction = async (
       customMetadata: {
         sensitive: settings.sensitive,
       },
-    },
-    function (error, result) {
-      if (error) console.log(error);
-      else console.log(result);
     }
   );
+
+  return {fileId, url, fileType};
 };

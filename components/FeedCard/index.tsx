@@ -1,9 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
 import Image from "../Common/Image";
 import Link from "next/link";
 import FeedImpressions from "../FeedImpressions";
 import Video from "../Common/Video";
 import useFileDetails from "@/hooks/useFileDetails";
+import { Post } from "@/hooks/usePosts";
 
 export interface FileDetailsResponse {
   width: number;
@@ -14,8 +15,8 @@ export interface FileDetailsResponse {
   customMetadata?: { sensitive: boolean };
 }
 
-const FeedCard = () => {
-  const { fileData: fileDetails } = useFileDetails("67836279432c476416f50339");
+const FeedCard:FC<Post> = ({id, content, imageUrl, imageId, author}) => {
+  const { fileData: fileDetails } = useFileDetails(imageId);
 
   return (
     <div className="feed-card p-4 border-y-[1px] border-borderGray">
@@ -47,7 +48,7 @@ const FeedCard = () => {
           <div className="flex gap-2 flex-wrap justify-between w-[100%]">
             <div className="flex flex-wrap gap-2">
               <h1 className="break-words overflow-ellipsis font-bold">
-                Ashish Bhattacharyya
+                {author.firstName} {author.lastName}
               </h1>
               <div className="flex gap-2 flex-wrap text-textGray">
                 <span className="text-md">@ashish182002</span>
@@ -63,10 +64,7 @@ const FeedCard = () => {
               // className={`${type === "status" && "text-lg"}`}
               className="text-slate-100 my-1"
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum,
-              animi. Laborum commodi aliquam alias molestias odio, ab in,
-              reprehenderit excepturi temporibus, ducimus necessitatibus fugiat
-              iure nam voluptas soluta pariatur inventore.
+              {content}
             </p>
           </Link>
           {
@@ -77,12 +75,12 @@ const FeedCard = () => {
                 alt=""
                 h={fileDetails.height}
                 w={fileDetails.width}
-                className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}
+                className={fileDetails.customMetadata?.sensitive ? "blur-lg cursor-pointer rounded-lg" : "cursor-pointer rounded-lg"}
               />
               :
               <Video
               path={fileDetails.filePath} 
-              className={fileDetails.customMetadata?.sensitive ? "blur-lg" : ""}
+              className={fileDetails.customMetadata?.sensitive ? "blur-lg cursor-pointer rounded-lg" : "cursor-pointer rounded-lg"}
               />
 
 

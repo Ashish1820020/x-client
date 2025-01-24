@@ -5,9 +5,12 @@ import NextImageComponent from "next/image";
 import { shareAction } from "@/app/actions";
 import { ImCancelCircle } from "react-icons/im";
 import ImageEditor from "./ImageEditor";
+import { graphqlClient } from "@/clients/api";
+import { createNewPost } from "@/graphql/mutation/post";
+import { useCreatePost } from "@/hooks/useCreatePost";
 
 type IPost = {
-  text: string | null;
+  text: string;
   media: File | null;
 };
 
@@ -17,7 +20,10 @@ export type TSettings = {
 };
 
 const Share = () => {
-  const [post, setPost] = useState<IPost | null>(null);
+  const { mutate } = useCreatePost();
+  const [post, setPost] = useState<IPost>({ text: "", media: null });
+  const [uploading, setUploading] = useState<boolean>(false);
+  const [error, setError] = useState<any>(null);
   const [editorOpen, setEditorOpen] = useState<boolean>(false);
   const [settings, setSettings] = useState<TSettings>({
     type: "original",
@@ -32,9 +38,9 @@ const Share = () => {
 
   const handleSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setPost((prevValue: IPost | null) => {
+      setPost((prevValue: IPost) => {
         if (prevValue) return { ...prevValue, media: e.target.files![0] };
-        return { media: e.target.files![0], text: null };
+        return { media: e.target.files![0], text: "" };
       });
     }
   };
@@ -62,10 +68,28 @@ const Share = () => {
       }
     })
   }
+
+  const handleCreatePost = async (formData: FormData) => {
+    try {
+      setUploading(true);
+      const {fileId, url} = await shareAction(formData, settings);
+
+      if(url && fileId) {
+        mutate({content: post?.text, imageId: fileId, imageUrl: url});
+      }
+      
+    } catch (error) {
+      setError(error);
+    }
+    finally{
+      setUploading(false);
+      setPost({text: "", media: null});
+    }
+  }
   return (
     <form
       className="flex gap-2 border-b-1 border-black p-4"
-      action={(formData: FormData) => shareAction(formData, settings)}
+      action={handleCreatePost}
     >
       <div className="feed-card-avatar relative w-10 h-10 rounded-full overflow-hidden">
         <Image
@@ -190,6 +214,7 @@ const Share = () => {
             className={`rounded-full font-bold text-black px-4 py-2 ${
               (post?.media || post?.text) ? "bg-white" : " bg-textGray"
             }`}
+            disabled={uploading || !(post?.media || post?.text)}
           >
             Post
           </button>
