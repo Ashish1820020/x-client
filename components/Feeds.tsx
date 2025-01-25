@@ -1,10 +1,11 @@
+
+"use client"
 import React from "react";
 import FeedCard from "./FeedCard";
 import usePosts from "@/hooks/usePosts";
 
 const Feeds = () => {
   const { posts = [] } = usePosts();
-  console.log(posts);
   
   return (
     <div>

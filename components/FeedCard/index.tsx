@@ -2,9 +2,8 @@ import React, { FC } from "react";
 import Image from "../Common/Image";
 import Link from "next/link";
 import FeedImpressions from "../FeedImpressions";
-import Video from "../Common/Video";
-import useFileDetails from "@/hooks/useFileDetails";
 import { Post } from "@/hooks/usePosts";
+import PostFile from "../PostFile";
 
 export interface FileDetailsResponse {
   width: number;
@@ -16,7 +15,6 @@ export interface FileDetailsResponse {
 }
 
 const FeedCard:FC<Post> = ({id, content, imageUrl, imageId, author}) => {
-  const { fileData: fileDetails } = useFileDetails(imageId);
 
   return (
     <div className="feed-card p-4 border-y-[1px] border-borderGray">
@@ -68,23 +66,7 @@ const FeedCard:FC<Post> = ({id, content, imageUrl, imageId, author}) => {
             </p>
           </Link>
           {
-            fileDetails && (
-              fileDetails.fileType === "image"?
-              <Image
-                path={fileDetails.filePath}
-                alt=""
-                h={fileDetails.height}
-                w={fileDetails.width}
-                className={fileDetails.customMetadata?.sensitive ? "blur-lg cursor-pointer rounded-lg" : "cursor-pointer rounded-lg"}
-              />
-              :
-              <Video
-              path={fileDetails.filePath} 
-              className={fileDetails.customMetadata?.sensitive ? "blur-lg cursor-pointer rounded-lg" : "cursor-pointer rounded-lg"}
-              />
-
-
-            )
+            imageId && <PostFile imageId={imageId}/>
           }
           <FeedImpressions />
         </div>

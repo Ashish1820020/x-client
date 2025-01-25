@@ -1,21 +1,20 @@
-import Login from "@/components/Login";
-import { useCurrentUser } from "@/hooks/user";
-import React from "react";
-import XApp from "./App";
+// import Login from "@/components/Login";
+// import { useCurrentUser } from "@/hooks/user";
+// import React from "react";
+// import XApp from "./App";
 
-const AppWrapper = () => {
-  const { user } = useCurrentUser();
-//   console.log(user);
+// const AppWrapper = () => {
+//   const { user } = useCurrentUser();
+// //   console.log(user);
 
-  return (
-    <>
-      {user ? (
-        <XApp user={user} />
-      ) : (
-        <Login />
-      )}
-    </>
-  );
-};
+//   return (
+//     <>
+//       {user ? (
+//         <XApp user={user} />
+//       ) : (
+//       )}
+//     </>
+//   );
+// };
 
-export default AppWrapper;
+// export default AppWrapper;

@@ -33,6 +33,7 @@ const PostModal = () => {
               src={selectedImageUrl}
               height={600}
               width={600}
+              priority
               alt="selected-img"
             />
             <div

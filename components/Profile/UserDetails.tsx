@@ -1,12 +1,14 @@
 import React from "react";
 import Image from "../Common/Image";
 
-const UserDetails = () => {
+type TUserDetails = {name: string, id: string};
+
+const UserDetails = ({name, id}: TUserDetails) => {
   return (
     <div className="p-4 flex flex-col gap-2">
       <div className="">
-        <h1 className="text-2xl font-bold">Ashish</h1>
-        <span className="text-textGray text-sm">@ashish182002</span>
+        <h1 className="text-2xl font-bold">{name}</h1>
+        <span className="text-textGray text-sm">@{id}</span>
       </div>
       <p>Student</p>
       <div className="flex gap-4 text-textGray text-[15px]">

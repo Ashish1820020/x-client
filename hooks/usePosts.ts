@@ -3,8 +3,8 @@ import { getAllPosts } from '@/graphql/query/post';
 import { useQuery } from '@tanstack/react-query';
 
 
-export type Author = {id: string, firstName: string, lastName: string, profileImageUrl: string}
-export type Post = {id: string, content: string, imageId: string, imageUrl: string, author: Author};
+export type Author = {id: string, firstName: string, lastName: string | null, profileImageUrl: string | null}
+export type Post = {id: string, content: string | null, imageId: string | null, imageUrl: string | null, author: Author};
 
 const usePosts = () => {
     const query = useQuery({

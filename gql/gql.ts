@@ -16,8 +16,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 const documents = {
     "\n  #graphql\n  mutation CreateNewPost($payload: CreatePost!) {\n    createPost(payload: $payload) {\n      id\n    }\n  }\n": types.CreateNewPostDocument,
     "\n  #graphql\n  query GetAllPosts{\n    getPosts {\n        id\n        content\n        imageId\n        imageUrl\n        author {\n            id\n            firstName\n            lastName\n            profileImageUrl\n        }\n    }\n  }\n": types.GetAllPostsDocument,
-    "#graphql\n    query verifyGoogleAuthToken($token: String!) {\n      verifyGoogleToken(token: $token)\n    }\n": types.VerifyGoogleAuthTokenDocument,
-    "\n  #graphql\n  query GetCurrentUser{\n    getCurrentUser {\n      id\n      email\n      firstName\n      lastName\n      profileImageUrl\n    }\n  }\n": types.GetCurrentUserDocument,
+    "\n  #graphql\n  query verifyGoogleAuthToken($token: String!) {\n    verifyGoogleToken(token: $token)\n  }\n": types.VerifyGoogleAuthTokenDocument,
+    "\n  #graphql\n  query GetCurrentUser {\n    getCurrentUser {\n      id\n      email\n      firstName\n      lastName\n      profileImageUrl\n    }\n  }\n": types.GetCurrentUserDocument,
+    "\n  #graphql\n  query GetUserById($userId: String!) {\n    getUserProfileData(userId: $userId) {\n      firstName\n      lastName\n      profileImageUrl\n      email\n      posts {\n        id\n        content\n        imageId\n        imageUrl\n      }\n    }\n  }\n": types.GetUserByIdDocument,
 };
 
 /**
@@ -45,11 +46,15 @@ export function graphql(source: "\n  #graphql\n  query GetAllPosts{\n    getPost
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "#graphql\n    query verifyGoogleAuthToken($token: String!) {\n      verifyGoogleToken(token: $token)\n    }\n"): (typeof documents)["#graphql\n    query verifyGoogleAuthToken($token: String!) {\n      verifyGoogleToken(token: $token)\n    }\n"];
+export function graphql(source: "\n  #graphql\n  query verifyGoogleAuthToken($token: String!) {\n    verifyGoogleToken(token: $token)\n  }\n"): (typeof documents)["\n  #graphql\n  query verifyGoogleAuthToken($token: String!) {\n    verifyGoogleToken(token: $token)\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  #graphql\n  query GetCurrentUser{\n    getCurrentUser {\n      id\n      email\n      firstName\n      lastName\n      profileImageUrl\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  query GetCurrentUser{\n    getCurrentUser {\n      id\n      email\n      firstName\n      lastName\n      profileImageUrl\n    }\n  }\n"];
+export function graphql(source: "\n  #graphql\n  query GetCurrentUser {\n    getCurrentUser {\n      id\n      email\n      firstName\n      lastName\n      profileImageUrl\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  query GetCurrentUser {\n    getCurrentUser {\n      id\n      email\n      firstName\n      lastName\n      profileImageUrl\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  #graphql\n  query GetUserById($userId: String!) {\n    getUserProfileData(userId: $userId) {\n      firstName\n      lastName\n      profileImageUrl\n      email\n      posts {\n        id\n        content\n        imageId\n        imageUrl\n      }\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  query GetUserById($userId: String!) {\n    getUserProfileData(userId: $userId) {\n      firstName\n      lastName\n      profileImageUrl\n      email\n      posts {\n        id\n        content\n        imageId\n        imageUrl\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

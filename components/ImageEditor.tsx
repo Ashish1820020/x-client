@@ -56,6 +56,7 @@ const ImageEditor = ({
             alt=""
             width={600}
             height={600}
+            priority
             className={`w-full ${
               settings.type === "original"
                 ? "h-full object-contain"

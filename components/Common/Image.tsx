@@ -18,7 +18,8 @@ const Image = ({ path, h, w, alt, transform, className }: IImage) => {
       path={path}
       className={className}
       alt={alt}
-      lqip={{active: true, quality: 20}}
+      loading="lazy"
+      // lqip={{active: true, quality: 20}}
       {
         ...(transform ?
         {transformation:[{ height: `${h}`, width: `${w}`}]}

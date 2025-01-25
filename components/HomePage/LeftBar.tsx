@@ -1,68 +1,72 @@
+"use client"
 import Link from "next/link";
 import React from "react";
 import Image from "../Common/Image";
 import NextImage from "next/image";
+import { useCurrentUser } from "@/hooks/user";
 
-const LeftBar = ({user}: any) => {
+const LeftBar = () => {
+  
+  const { user } = useCurrentUser();
   const leftBarLinks = [
     {
       id: 1,
       name: "Homepage",
-      link: "/",
+      link: "/home",
       icon: "home.svg",
     },
     {
       id: 2,
       name: "Explore",
-      link: "/",
+      link: "/home",
       icon: "explore.svg",
     },
     {
       id: 3,
       name: "Notification",
-      link: "/",
+      link: "/home",
       icon: "notification.svg",
     },
     {
       id: 4,
       name: "Messages",
-      link: "/",
+      link: "/home",
       icon: "message.svg",
     },
     {
       id: 5,
       name: "Bookmarks",
-      link: "/",
+      link: "/home",
       icon: "bookmark.svg",
     },
     {
       id: 6,
       name: "Jobs",
-      link: "/",
+      link: "/home",
       icon: "job.svg",
     },
     {
       id: 7,
       name: "Communities",
-      link: "/",
+      link: "/home",
       icon: "community.svg",
     },
     {
       id: 8,
       name: "Premium",
-      link: "/",
+      link: "/home",
       icon: "logo.svg",
     },
     {
       id: 9,
       name: "Profile",
-      link: "/",
+      link: `/${user?.id ?? 1}`,
       icon: "profile.svg",
     },
     {
       id: 10,
       name: "More",
-      link: "/",
+      link: "/home",
       icon: "more.svg",
     },
   ];
@@ -80,7 +84,7 @@ const LeftBar = ({user}: any) => {
               href={link.link}
               className="flex items-center gap-5 hover:bg-gray-700 rounded-full p-[12px] w-fit cursor-pointer"
             >
-              {/* <Image path={`/icons/${link.icon}`} h={26.25} w={26.25} alt="icon"/> */}
+              <Image path={`/icons/${link.icon}`} h={26.25} w={26.25} alt="icon"/>
               <span className="text-[20px] hidden xxl:inline ">
                 {link.name}
               </span>
@@ -113,15 +117,17 @@ const LeftBar = ({user}: any) => {
               h={100}
               transform={true}
             /> */}
-            <NextImage
-              src={user.profileImageUrl}
-              alt="profile-img"
-              width={100}
-              height={100}
-              layout="responsive"
-              objectFit="cover"
-              className="rounded-full"
-            />
+            {
+              user?.profileImageUrl &&
+              (<NextImage
+                src={user?.profileImageUrl}
+                alt="profile-img"
+                width={100}
+                height={100}
+                priority
+                className="rounded-full object-cover"
+              />)
+            }
           </div>
 
           <div className="hidden xxl:flex flex-col">

@@ -5,8 +5,6 @@ import NextImageComponent from "next/image";
 import { shareAction } from "@/app/actions";
 import { ImCancelCircle } from "react-icons/im";
 import ImageEditor from "./ImageEditor";
-import { graphqlClient } from "@/clients/api";
-import { createNewPost } from "@/graphql/mutation/post";
 import { useCreatePost } from "@/hooks/useCreatePost";
 
 type IPost = {
@@ -30,8 +28,6 @@ const Share = () => {
     sensitive: false,
   });
 
-
-  console.log(post);
   
 
   const selectedImageUrl = post?.media ? URL.createObjectURL(post.media) : null;
@@ -115,6 +111,7 @@ const Share = () => {
               src={selectedImageUrl}
               height={600}
               width={600}
+              priority
               alt="selected-img"
             />
             <div
