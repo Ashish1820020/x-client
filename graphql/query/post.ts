@@ -10,10 +10,10 @@ export const getAllPosts = graphql(`
         imageId
         imageUrl
         author {
-            id
-            firstName
-            lastName
-            profileImageUrl
+          id
+          firstName
+          lastName
+          profileImageUrl
         }
     }
   }

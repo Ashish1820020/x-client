@@ -1,3 +1,4 @@
+"use client";
 import React from 'react'
 import FeedCard from './FeedCard'
 import { Author } from '@/hooks/usePosts';

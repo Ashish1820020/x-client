@@ -21,12 +21,14 @@ const Share = () => {
   const { mutate } = useCreatePost();
   const [post, setPost] = useState<IPost>({ text: "", media: null });
   const [uploading, setUploading] = useState<boolean>(false);
-  const [error, setError] = useState<any>(null);
+  const [error, setError] = useState<null>(null);
   const [editorOpen, setEditorOpen] = useState<boolean>(false);
   const [settings, setSettings] = useState<TSettings>({
     type: "original",
     sensitive: false,
   });
+  console.log(error);
+  
 
   
 
@@ -75,7 +77,9 @@ const Share = () => {
       }
       
     } catch (error) {
-      setError(error);
+      console.log(error);
+      
+      setError(null);
     }
     finally{
       setUploading(false);

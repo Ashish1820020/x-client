@@ -4,8 +4,6 @@ import "./globals.css";
 import Providers from "./providers";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import LeftBar from "@/components/HomePage/LeftBar";
-import RightBar from "@/components/HomePage/RightBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,20 +36,9 @@ export default function RootLayout({
           <GoogleOAuthProvider
             clientId={process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID ?? ""}
           >
-            <div className="max-w-screen-md lg:max-w-screen-lg mx-auto xl:max-w-screen-xl xxl:max-w-screen-xxl flex justify-between">
-              <div className="px-2 xsm:px-4 xxl:px-8">
-                <LeftBar />
-              </div>
-
-              <div className="flex-1 lg:min-w-[600px] border-x-[1px] border-borderGray">
-                {children}
-                {modal && modal}
-                <ReactQueryDevtools initialIsOpen={false} />
-              </div>
-              <div className="hidden lg:flex ml-4 md:ml-8 flex-1">
-                <RightBar />
-              </div>
-            </div>
+            {children}
+            {modal && modal}
+            <ReactQueryDevtools initialIsOpen={false} />
           </GoogleOAuthProvider>
         </Providers>
       </body>

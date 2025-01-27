@@ -1,5 +1,5 @@
 import Image from '@/components/Common/Image';
-import NextImageComponent from 'next/image';
+// import NextImageComponent from 'next/image';
 import React from 'react'
 
 const PostModal = () => {

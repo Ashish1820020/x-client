@@ -14,8 +14,7 @@ export interface FileDetailsResponse {
   customMetadata?: { sensitive: boolean };
 }
 
-const FeedCard:FC<Post> = ({id, content, imageUrl, imageId, author}) => {
-
+const FeedCard: FC<Post> = ({ content, imageId, author }) => {
   return (
     <div className="feed-card p-4 border-y-[1px] border-borderGray">
       <div className="flex items-center gap-2 text-sm text-textGray mb-2 from-bold">
@@ -45,9 +44,11 @@ const FeedCard:FC<Post> = ({id, content, imageUrl, imageId, author}) => {
         <div className="flex flex-col flex-1">
           <div className="flex gap-2 flex-wrap justify-between w-[100%]">
             <div className="flex flex-wrap gap-2">
-              <h1 className="break-words overflow-ellipsis font-bold">
-                {author.firstName} {author.lastName}
-              </h1>
+              <Link href={`/${author.id}`}>
+                <h1 className="break-words overflow-ellipsis font-bold">
+                  {author.firstName} {author.lastName}
+                </h1>
+              </Link>
               <div className="flex gap-2 flex-wrap text-textGray">
                 <span className="text-md">@ashish182002</span>
                 <span className="">14h</span>
@@ -65,9 +66,7 @@ const FeedCard:FC<Post> = ({id, content, imageUrl, imageId, author}) => {
               {content}
             </p>
           </Link>
-          {
-            imageId && <PostFile imageId={imageId}/>
-          }
+          {imageId && <PostFile imageId={imageId} />}
           <FeedImpressions />
         </div>
       </div>

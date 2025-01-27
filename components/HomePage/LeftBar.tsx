@@ -8,65 +8,66 @@ import { useCurrentUser } from "@/hooks/user";
 const LeftBar = () => {
   
   const { user } = useCurrentUser();
+  
   const leftBarLinks = [
     {
       id: 1,
       name: "Homepage",
-      link: "/home",
+      link: "/app/home",
       icon: "home.svg",
     },
     {
       id: 2,
       name: "Explore",
-      link: "/home",
+      link: "/app/home",
       icon: "explore.svg",
     },
     {
       id: 3,
       name: "Notification",
-      link: "/home",
+      link: "/app/home",
       icon: "notification.svg",
     },
     {
       id: 4,
       name: "Messages",
-      link: "/home",
+      link: "/app/home",
       icon: "message.svg",
     },
     {
       id: 5,
       name: "Bookmarks",
-      link: "/home",
+      link: "/app/home",
       icon: "bookmark.svg",
     },
     {
       id: 6,
       name: "Jobs",
-      link: "/home",
+      link: "/app/home",
       icon: "job.svg",
     },
     {
       id: 7,
       name: "Communities",
-      link: "/home",
+      link: "/app/home",
       icon: "community.svg",
     },
     {
       id: 8,
       name: "Premium",
-      link: "/home",
+      link: "/app/home",
       icon: "logo.svg",
     },
     {
       id: 9,
       name: "Profile",
-      link: `/${user?.id ?? 1}`,
+      link: `/app/${user?.id ?? 1}`,
       icon: "profile.svg",
     },
     {
       id: 10,
       name: "More",
-      link: "/home",
+      link: "/app/home",
       icon: "more.svg",
     },
   ];

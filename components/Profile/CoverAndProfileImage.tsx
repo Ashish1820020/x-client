@@ -1,10 +1,10 @@
 "use client"
-import { useCurrentUser } from "@/hooks/user";
+// import { useCurrentUser } from "@/hooks/user";
 import Image from "next/image";
 import React, { FC } from "react";
-type ICoverImageProps = {coverImage: string, profileImage: string}
+type ICoverImageProps = {coverImage: string, profileImage: string | null | undefined}
 
-const CoverAndProfileImage:FC<ICoverImageProps> = ({coverImage, profileImage}) => {
+const CoverAndProfileImage:FC<ICoverImageProps> = ({profileImage}) => {
   
   return (
     <div className="">
@@ -15,7 +15,9 @@ const CoverAndProfileImage:FC<ICoverImageProps> = ({coverImage, profileImage}) =
         </div>
         <div className="w-1/5 aspect-square absolute left-4 -translate-y-1/2 rounded-full overflow-hidden border-4 border-black bg-gray-300">
           {/* <Image path="Profile Images/ashish.png" h={100} w={100} alt='cover-img' transform={true}/> */}
-          <Image src={profileImage} height={200} width={200} alt='cover-img' className="object-cover cursor-pointer"/>
+          {
+            profileImage && <Image src={profileImage} height={200} width={200} alt='cover-img' className="object-cover cursor-pointer"/>
+          }
         </div>
       </div>
     </div>

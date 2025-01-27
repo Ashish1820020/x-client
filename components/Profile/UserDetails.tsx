@@ -1,9 +1,10 @@
 import React from "react";
 import Image from "../Common/Image";
+import { TFollowers } from "./BioIcons";
 
-type TUserDetails = {name: string, id: string};
+type TUserDetails = {name: string, id: string, followers: TFollowers [], following: TFollowers []};
 
-const UserDetails = ({name, id}: TUserDetails) => {
+const UserDetails = ({name, id, followers, following}: TUserDetails) => {
   return (
     <div className="p-4 flex flex-col gap-2">
       <div className="">
@@ -23,11 +24,11 @@ const UserDetails = ({name, id}: TUserDetails) => {
       </div>
       <div className="flex gap-4">
         <div className="flex items-center gap-2">
-          <span className="font-bold">313</span>
+          <span className="font-bold">{followers.length}</span>
           <span className="text-textGray text-[15px]">Followers</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="font-bold">29</span>
+          <span className="font-bold">{following.length}</span>
           <span className="text-textGray text-[15px]">Followings</span>
         </div>
       </div>

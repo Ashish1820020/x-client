@@ -1,16 +1,36 @@
-import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers'; // To access cookies in App Router
 
-export function middleware(request: Request) {
-  const token = cookies().then((data) => {
-    return data.get('authToken');
-  }).catch((err) => {});
+export async function middleware(request: Request) {
+  // Retrieve the cookies from the incoming request
+  const cookieStore = await cookies();
+  
+  // Get the 'authToken' cookie
+  const authToken = cookieStore.get('authToken')?.value;
+  console.log("authToken", authToken);
   
 
-  if (!token) {
-    return NextResponse.redirect(new URL('/login', request.url));
+  if (!authToken) {
+    // If no token, redirect to login page or handle accordingly
+    return NextResponse.redirect(new URL('/auth', request.url));
   }
 
-  // Validate token here if necessary (e.g., by verifying it with the backend)
-  return NextResponse.next();
+  try {
+    console.log('Authenticated with token:', authToken);
+
+    // Continue with the request flow
+    return NextResponse.next();
+  } catch (error) {
+    console.error('Token verification failed', error);
+    return NextResponse.redirect(new URL('/auth', request.url)); // If verification fails, redirect to login
+  }
 }
+
+
+export const config = {
+  matcher: [
+    '/app/(home.*)',   // Matches /home, /home/anything
+    '/app/(user.*)',   // Matches /user, /user/anything
+    '/app/(:path.*)',       // Matches all paths (use this carefully as it applies to everything)
+  ],
+};
